@@ -1,0 +1,52 @@
+[
+  {
+    "id": "exp-2",
+    "role": "Head of R&D Division",
+    "org": "HMIF XVI UMN",
+    "period": "Nov 2025 – Present",
+    "desc": "Lead a team of 5 in developing digital solutions for Informatics students. Spearheading a full rebuild of the HMIF official website from scratch, while overseeing three specialized labs: Cyber Security, Artificial Intelligence, and Digital Interaction."
+  },
+  {
+    "id": "exp-1",
+    "role": "Website Division Coordinator",
+    "org": "PPIF UMN",
+    "period": "Jan 2026 – Present",
+    "desc": "Coordinate the official study program introduction website and a real-time quiz platform. Build the main site in Next.js (TSX) and a Kahoot-like quiz app using React, Express, and Socket.io."
+  },
+  {
+    "id": "exp-3",
+    "role": "Website Division Coordinator",
+    "org": "INFORTA UMN (Informatics Anniversary)",
+    "period": "March 2026 – May 2026",
+    "desc": "Led the web division for the Informatics Anniversary event. Developed a participant registration platform using Laravel and React, and built a real-time quiz application (Kahoot-style) powered by React, Express.js, and Socket.io. Coordinated development timelines and optimized the backend to handle concurrent user traffic during live sessions."
+  },
+  {
+    "id": "exp-4",
+    "role": "Website Division Coordinator",
+    "org": "BYTE UMN",
+    "period": "May 2025 – Nov 2025",
+    "desc": "Led the web division developing an event website with Laravel and real-time features via Pusher. Coordinated timelines and optimized backend for concurrent user load."
+  },
+  {
+    "id": "exp-5",
+    "role": "Website Division Member",
+    "org": "PPIF UMN",
+    "period": "Mar 2025 – Aug 2025",
+    "desc": "Collaborated on the front-end of the official study program website using Next.js. Ensured responsiveness and cross-browser compatibility."
+  },
+  {
+    "id": "exp-6",
+    "role": "R&D Division Member",
+    "org": "HMIF UMN",
+    "period": "Nov 2024 – Nov 2025",
+    "desc": "Developed and maintained organizational web applications. Conducted technical research to improve project quality and drive innovation."
+  },
+  {
+    "id": "exp-7",
+    "role": "Web Developer Intern",
+    "org": "SMK STRADA",
+    "period": "Jul 2023 – Dec 2023",
+    "desc": "Built a company profile web app with custom CMS in Laravel. Used Eloquent ORM to manage database queries and optimize MySQL storage."
+  }
+]
+
