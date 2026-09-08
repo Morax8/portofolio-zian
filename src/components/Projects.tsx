@@ -20,7 +20,7 @@ export function Projects() {
     <Section id="projects" width="grid">
       <SectionHeader
         index="03"
-        eyebrow="SELECTED_WORK"
+        eyebrow="Selected work"
         title="Featured projects."
         description="Real-time platforms, applied ML, and production event portals. Select any project for the full detail."
       />

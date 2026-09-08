@@ -1,11 +1,11 @@
 import { Boxes, Brain, Code, Database, type LucideIcon } from "lucide-react";
-import { ABOUT_PARAGRAPHS, TECH_CARDS } from "@/lib/data";
+import { ABOUT_PARAGRAPHS, TECH_CARDS, type TechCard } from "@/lib/data";
 import { Section } from "./ui/Section";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Reveal } from "./ui/Reveal";
 import { Tag } from "./ui/Tag";
 
-const ICONS: Record<string, LucideIcon> = {
+const ICONS: Record<TechCard["key"], LucideIcon> = {
   FRONTEND: Code,
   BACKEND_DB: Database,
   AI_DATASCI: Brain,
@@ -17,7 +17,7 @@ export function About() {
     <Section id="about" width="narrative">
       <SectionHeader
         index="01"
-        eyebrow="OPERATOR_PROFILE"
+        eyebrow="About"
         title="Full-stack engineering, applied ML."
         description="Between the browser and the model — I ship both."
       />
@@ -25,8 +25,8 @@ export function About() {
       {/* narrative */}
       <div className="mt-10 grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-12">
         <Reveal className="border-l-2 border-crimson/40 pl-5">
-          <p className="font-mono text-xs leading-relaxed text-metal-dim">
-            {"// focus"}
+          <p className="font-mono text-xs leading-relaxed uppercase tracking-tactical text-metal-dim">
+            Focus
           </p>
           <p className="mt-2 font-display text-lg font-medium leading-snug text-bright">
             Turning ambiguous ideas into production systems that hold up under
@@ -47,33 +47,33 @@ export function About() {
       {/* tech stack grid */}
       <div className="mt-16">
         <Reveal className="mb-6 flex items-center gap-3 font-mono text-xs">
-          <span className="text-crimson">{"//"}</span>
+          <span className="h-px w-8 bg-crimson/40" />
           <span className="tracking-tactical text-metal-dim uppercase">
-            Tech_Stack
+            Tech stack
           </span>
-          <span className="h-px flex-1 bg-white/10" />
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TECH_CARDS.map((card, i) => {
-            const Icon = ICONS[card.title];
+            const Icon = ICONS[card.key];
             return (
               <Reveal key={card.index} delay={i * 0.07}>
                 <article className="group relative h-full rounded-md border border-dashed border-zinc-800 bg-carbon/50 p-5 transition-all duration-300 hover:border-crimson/50 hover:bg-carbon">
-      
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-black/40 text-crimson transition-colors group-hover:border-crimson/40">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/10 bg-black/40 text-crimson transition-colors group-hover:border-crimson/40">
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </span>
                     <span className="font-mono text-[10px] text-metal-dim">
-                      [{card.index}]
+                      {card.index}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 font-mono text-sm font-semibold tracking-wide text-bright">
-                    [{card.index}_{card.title}]
+                  <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-bright">
+                    {card.label}
                   </h3>
-                  <p className="mt-1 text-xs text-metal-dim">{card.caption}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-metal-dim">
+                    {card.caption}
+                  </p>
 
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {card.stack.map((tech) => (

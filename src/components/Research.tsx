@@ -37,18 +37,16 @@ export function Research() {
         {/* header */}
         <motion.div
           variants={rise}
-          className="relative z-10 flex items-center gap-3 font-mono text-xs"
+          className="relative z-10 flex items-center gap-3 text-xs"
         >
-          <span className="text-crimson">[R&D]</span>
           <motion.span
             variants={line}
             style={{ transformOrigin: "left" }}
             className="h-px w-8 bg-crimson/40"
           />
           <span className="tracking-tactical text-metal-dim uppercase">
-            Research_&_Lab_Work
+            Research & lab work
           </span>
-          <span className="inline-block h-3 w-1.5 translate-y-px bg-crimson animate-caret" />
         </motion.div>
 
         {/* items */}
@@ -65,25 +63,13 @@ export function Research() {
                 <span className="pointer-events-none absolute -inset-3 rounded-lg bg-crimson/4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="relative flex items-center gap-3">
-                  {/* icon — idle float + hover pop */}
-                  <div className="relative">
-                    <motion.span
-                      className="relative inline-flex h-11 w-11 items-center justify-center rounded-md border border-crimson/30 bg-crimson/5 text-crimson transition-colors duration-300 group-hover:border-crimson group-hover:bg-crimson/15"
-                      animate={{ y: [0, -4, 0] }}
-                      transition={{
-                        duration: 3 + i,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      whileHover={{ scale: 1.12, rotate: -6 }}
-                    >
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
-                    </motion.span>
-                  </div>
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-crimson/30 bg-crimson/5 text-crimson transition-colors duration-300 group-hover:border-crimson group-hover:bg-crimson/15">
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
 
                   <div>
                     <p className="font-mono text-[10px] tracking-widest text-metal-dim">
-                      R&D_{item.index} · {item.org}
+                      {item.index} · {item.org}
                     </p>
                     <h3 className="font-display text-lg font-bold text-bright transition-colors duration-300 group-hover:text-crimson">
                       {item.title}

@@ -17,7 +17,10 @@ export interface Stat {
 
 export interface TechCard {
   index: string;
-  title: string;
+  /** Stable key — drives icon lookup. */
+  key: "FRONTEND" | "BACKEND_DB" | "AI_DATASCI" | "INFRA_TOOLS";
+  /** Display label rendered in the card. */
+  label: string;
   caption: string;
   stack: string[];
 }
@@ -48,6 +51,15 @@ export interface ExperienceItem {
   liveUrl?: string;
 }
 
+export interface ProjectShot {
+  /** Public path, e.g. "/projects/byte/01.webp". */
+  src: string;
+  /** Intrinsic pixel width — lets next/image hold the aspect ratio (no CLS). */
+  width: number;
+  /** Intrinsic pixel height. */
+  height: number;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -58,9 +70,9 @@ export interface Project {
   repoUrl?: string;
   /** Tailwind span at the lg breakpoint for the bento grid. */
   span?: string;
-  /** Optional real screenshot (e.g. "/foto/inforta.png"). Falls back to a
-   *  typographic index plate when absent. */
-  screenshot?: string;
+  /** Optional real screenshots rendered as a gallery in the detail modal.
+   *  Falls back to a typographic index plate when absent. */
+  screenshots?: ProjectShot[];
 }
 
 export interface ResearchItem {
@@ -84,7 +96,8 @@ export const PROFILE = {
   name: "ADITYA ZIANUR",
   role: "Head of R&D Division @ HMIF XVI UMN · Website Coordinator @ PPIF UMN 2026",
   /** Hero statement. Says what the work is, in one sentence. */
-  headline: "Full-stack engineer building real-time platforms and applied ML systems.",
+  headline:
+    "Full-stack engineer building real-time platforms and applied ML systems.",
   /** Supporting paragraph — concrete, no adjectives doing the work. */
   lede: "I lead a five-person R&D team at HMIF XVI UMN and ship event platforms — real-time quiz systems, registration portals, company profiles — on deadlines measured in weeks. Alongside that I build predictive models, most recently a URL-lexical phishing classifier.",
   /** Current post, shown as the photo caption. */
@@ -117,25 +130,29 @@ export const ABOUT_PARAGRAPHS: string[] = [
 export const TECH_CARDS: TechCard[] = [
   {
     index: "01",
-    title: "FRONTEND",
+    key: "FRONTEND",
+    label: "Frontend",
     caption: "Interfaces & interaction",
     stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "JavaScript"],
   },
   {
     index: "02",
-    title: "BACKEND_DB",
+    key: "BACKEND_DB",
+    label: "Backend & databases",
     caption: "Services & data layers",
     stack: ["PHP", "Laravel", "Node.js", "Express.js", "MySQL", "Socket.io"],
   },
   {
     index: "03",
-    title: "AI_DATASCI",
+    key: "AI_DATASCI",
+    label: "AI & data science",
     caption: "Models & analysis",
     stack: ["Python", "scikit-learn", "Pandas", "ML / DL", "Flask"],
   },
   {
     index: "04",
-    title: "INFRA_TOOLS",
+    key: "INFRA_TOOLS",
+    label: "Infrastructure & tools",
     caption: "Ship, secure & operate",
     stack: ["Git", "VPS Deploy", "Vercel", "Kali Linux", "Docker"],
   },
@@ -283,7 +300,9 @@ export const EXPERIENCES: ExperienceItem[] = [
 
 /* Gapless 3-col bento: 3 featured (lg:col-span-2) cards, each immediately
    followed by a regular card, then a final row of three regulars = 12 cells.
-   Keep that featured→regular pairing when editing so no column is skipped. */
+   Keep that featured→regular pairing when editing so no column is skipped.
+   Ordering intent: web builds lead (rows 1–3), S!GAP holds row 3, and the
+   ML/DL/security work (phishing, loan, pentest) closes the last row. */
 export const PROJECTS: Project[] = [
   {
     id: "hmif-web",
@@ -293,6 +312,12 @@ export const PROJECTS: Project[] = [
     featured: true,
     liveUrl: "https://hmif.umn.ac.id",
     span: "lg:col-span-2",
+    screenshots: [
+      { src: "/projects/hmif-web/01.webp", width: 1600, height: 774 },
+      { src: "/projects/hmif-web/02.webp", width: 1600, height: 770 },
+      { src: "/projects/hmif-web/03.webp", width: 1600, height: 770 },
+      { src: "/projects/hmif-web/04.webp", width: 1600, height: 772 },
+    ],
   },
   {
     id: "inforta",
@@ -301,21 +326,45 @@ export const PROJECTS: Project[] = [
     desc: "Full-stack event platform with a real-time Kahoot-like quiz via Socket.io, deployed in under one month.",
     featured: false,
     liveUrl: "https://infortaumn.my.id",
+    screenshots: [
+      { src: "/projects/inforta/01.webp", width: 1600, height: 774 },
+      { src: "/projects/inforta/02.webp", width: 1600, height: 778 },
+      { src: "/projects/inforta/03.webp", width: 1600, height: 773 },
+      { src: "/projects/inforta/04.webp", width: 1600, height: 779 },
+    ],
   },
   {
-    id: "phishing",
-    title: "Phishing Website Detection",
-    tags: ["Python", "Machine Learning", "Deep Learning"],
-    desc: "ML classifier leveraging URL lexical features to detect phishing sites, using an ensemble-based approach.",
+    id: "ppif",
+    title: "PPIF Website",
+    tags: ["Next.js", "Express.js", "Socket.io"],
+    desc: "Study program introduction website with an integrated real-time quiz platform for incoming students.",
     featured: true,
-    repoUrl: "https://github.com/Morax8/FinalProjectML",
+    liveUrl: "https://ppif-2025.vercel.app",
     span: "lg:col-span-2",
+    screenshots: [
+      { src: "/projects/ppif/01.webp", width: 1600, height: 768 },
+      { src: "/projects/ppif/02.webp", width: 1600, height: 770 },
+      { src: "/projects/ppif/03.webp", width: 1600, height: 765 },
+      { src: "/projects/ppif/04.webp", width: 1600, height: 764 },
+      { src: "/projects/ppif/05.webp", width: 1600, height: 765 },
+      { src: "/projects/ppif/06.webp", width: 1600, height: 768 },
+      { src: "/projects/ppif/07.webp", width: 1600, height: 764 },
+    ],
   },
   {
-    id: "loan",
-    title: "Loan Approval Prediction",
-    tags: ["Python", "Scikit-Learn", "Flask"],
-    desc: "Predictive model comparing Decision Tree and Gradient Boosting for loan eligibility, with a Flask UI.",
+    id: "byte",
+    title: "BYTE Event Website",
+    tags: ["Laravel", "Pusher", "MySQL"],
+    desc: "Event website with real-time audience interaction via Pusher, optimized for concurrent traffic.",
+    liveUrl: "https://byteumn.com",
+    repoUrl: "https://github.com/stevjoo/byte2025",
+    screenshots: [
+      { src: "/projects/byte/01.webp", width: 1600, height: 766 },
+      { src: "/projects/byte/02.webp", width: 1600, height: 779 },
+      { src: "/projects/byte/03.webp", width: 1600, height: 763 },
+      { src: "/projects/byte/04.webp", width: 1600, height: 769 },
+      { src: "/projects/byte/05.webp", width: 1600, height: 769 },
+    ],
   },
   {
     id: "sigap",
@@ -328,30 +377,29 @@ export const PROJECTS: Project[] = [
     span: "lg:col-span-2",
   },
   {
-    id: "pentest",
-    title: "HMIF Penetration Testing",
-    tags: ["Kali Linux", "dirb", "whatweb"],
-    desc: "Security assessment of the HMIF website using web enumeration and reconnaissance tools.",
-  },
-  {
-    id: "ppif",
-    title: "PPIF Website",
-    tags: ["Next.js", "Express.js", "Socket.io"],
-    desc: "Study program introduction website with an integrated real-time quiz platform for incoming students.",
-    liveUrl: "https://ppif-2025.vercel.app",
-  },
-  {
-    id: "byte",
-    title: "BYTE Event Website",
-    tags: ["Laravel", "Pusher", "MySQL"],
-    desc: "Event website with real-time audience interaction via Pusher, optimized for concurrent traffic.",
-    liveUrl: "https://byteumn.com",
-  },
-  {
     id: "cms",
     title: "Company Profile CMS",
     tags: ["Laravel", "Eloquent ORM", "MySQL"],
     desc: "Company profile web app with a custom Laravel CMS built during internship at SMK STRADA.",
+  },
+  {
+    id: "phishing",
+    title: "Phishing Website Detection",
+    tags: ["Python", "Machine Learning", "Deep Learning"],
+    desc: "ML classifier leveraging URL lexical features to detect phishing sites, using an ensemble-based approach.",
+    repoUrl: "https://github.com/Morax8/FinalProjectML",
+  },
+  {
+    id: "loan",
+    title: "Loan Approval Prediction",
+    tags: ["Python", "Scikit-Learn", "Flask"],
+    desc: "Predictive model comparing Decision Tree and Gradient Boosting for loan eligibility, with a Flask UI.",
+  },
+  {
+    id: "pentest",
+    title: "HMIF Penetration Testing",
+    tags: ["Kali Linux", "dirb", "whatweb"],
+    desc: "Security assessment of the HMIF website using web enumeration and reconnaissance tools.",
   },
 ];
 
@@ -392,19 +440,3 @@ export const SOCIALS: SocialLink[] = [
     icon: "mail",
   },
 ];
-
-/* Terminal boot sequence shown in the Hero profile frame. */
-export const TERMINAL_LINES: {
-  text: string;
-  tone: "sys" | "ok" | "run" | "dim";
-}[] = [
-  { text: "$ ./init --profile aditya.zianur", tone: "run" },
-  { text: "[ OK ] loading modules ................ done", tone: "ok" },
-  { text: "[ SYS ] compiling portfolio.tsx", tone: "sys" },
-  { text: "[ OK ] frontend ...... react/next/tailwind", tone: "ok" },
-  { text: "[ OK ] backend ....... node/laravel/mysql", tone: "ok" },
-  { text: "[ OK ] ml_engine ..... phishing_detector", tone: "ok" },
-  { text: "[ RUN ] deploy → vercel + vps ......... live", tone: "run" },
-  { text: "> status: SYS_ONLINE", tone: "sys" },
-];
-

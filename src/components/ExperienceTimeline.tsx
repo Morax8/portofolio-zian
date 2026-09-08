@@ -21,6 +21,12 @@ import { cn } from "@/lib/utils";
 
 type Filter = "ALL" | ExperienceCategory;
 const FILTERS: Filter[] = ["ALL", "LEADERSHIP", "DEVELOPMENT", "LAB & SECURITY"];
+const FILTER_LABELS: Record<Filter, string> = {
+  ALL: "All",
+  LEADERSHIP: "Leadership",
+  DEVELOPMENT: "Development",
+  "LAB & SECURITY": "Lab & security",
+};
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -86,9 +92,9 @@ export function ExperienceTimeline() {
     <Section id="experience" width="narrative">
       <SectionHeader
         index="02"
-        eyebrow="EXPERIENCE_LOG"
+        eyebrow="Experience"
         title="Leadership & engineering timeline."
-        description="Filter by track, then click any node to expand the full case log — achievements, impact, and live deliverables."
+        description="Filter by track, then click any role to expand the full case log — achievements, impact, and live deliverables."
       />
 
       {/* filter tabs */}
@@ -102,16 +108,16 @@ export function ExperienceTimeline() {
               onClick={() => changeFilter(f)}
               aria-pressed={active}
               className={cn(
-                "group inline-flex cursor-pointer items-center gap-2 rounded-[4px] border px-3 py-2 font-mono text-[11px] tracking-wide transition-all duration-200",
+                "group inline-flex cursor-pointer items-center gap-2 rounded-[2px] border px-3 py-2 text-xs transition-colors duration-200",
                 active
                   ? "border-crimson bg-crimson/15 text-crimson"
                   : "border-white/10 bg-carbon/50 text-metal-grey hover:border-crimson/40 hover:text-bright",
               )}
             >
-              <span>[{f}]</span>
+              <span>{FILTER_LABELS[f]}</span>
               <span
                 className={cn(
-                  "rounded-[3px] px-1.5 py-0.5 text-[10px] transition-colors",
+                  "rounded-[2px] px-1.5 py-0.5 font-mono text-[10px] transition-colors",
                   active
                     ? "bg-crimson/20 text-crimson"
                     : "bg-white/5 text-metal-dim",
@@ -128,8 +134,7 @@ export function ExperienceTimeline() {
       <div className="relative mt-12">
         {/* central spine */}
         <div className="absolute bottom-0 left-4 top-0 w-px md:left-1/2 md:-translate-x-1/2">
-          <div className="h-full w-full bg-linear-to-b from-transparent via-crimson/50 to-transparent" />
-          <div className="absolute inset-0 w-px bg-crimson/25 blur-[2px] animate-spine" />
+          <div className="h-full w-full bg-linear-to-b from-transparent via-crimson/40 to-transparent" />
         </div>
 
         <ul className="space-y-6 md:space-y-3">
@@ -153,8 +158,8 @@ export function ExperienceTimeline() {
 
         {/* empty-state guard (defensive; every filter currently has items) */}
         {visible.length === 0 && (
-          <p className="py-10 text-center font-mono text-xs text-metal-dim">
-            {"// no records in this track"}
+          <p className="py-10 text-center text-xs text-metal-dim">
+            No records in this track.
           </p>
         )}
       </div>
@@ -195,14 +200,11 @@ function ExperienceRow({
       {/* spine node — lights up on hover / active */}
       <div className="pointer-events-none absolute left-4 top-6 z-10 -translate-x-1/2 md:left-1/2">
         <div className="relative">
-          {active && (
-            <span className="absolute -inset-1.5 rounded-full bg-crimson/30 blur-md animate-pulse" />
-          )}
           <span
             className={cn(
-              "relative flex h-4 w-4 rotate-45 items-center justify-center border bg-void transition-all duration-300",
+              "relative flex h-4 w-4 rotate-45 items-center justify-center border bg-void transition-colors duration-300",
               hovered
-                ? "scale-110 border-crimson"
+                ? "border-crimson"
                 : active
                   ? "border-crimson"
                   : "border-crimson/30",
@@ -253,19 +255,14 @@ function ExperienceRow({
             className="flex w-full cursor-pointer flex-col gap-3 p-5 text-left sm:p-6"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="font-mono text-[11px] text-crimson">
-                [EXP_{String(order).padStart(2, "0")}]
+              <span className="font-mono text-[11px] text-metal-dim">
+                {String(order).padStart(2, "0")} · {exp.org}
               </span>
               {active ? (
-                <span className="inline-flex animate-pulse items-center gap-1.5 rounded-[3px] border border-red-500/40 bg-red-500/20 px-2 py-0.5 font-mono text-[10px] tracking-wide text-red-500">
-                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                  [ACTIVE_SESSION]
+                <span className="inline-flex items-center gap-1.5 rounded-[2px] border border-crimson/40 bg-crimson/10 px-2 py-0.5 text-[10px] tracking-wide text-crimson">
+                  Current
                 </span>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 rounded-[3px] border border-white/15 bg-white/5 px-2 py-0.5 font-mono text-[10px] tracking-wide text-metal-dim">
-                  [ARCHIVED]
-                </span>
-              )}
+              ) : null}
             </div>
 
             <div>
@@ -307,14 +304,14 @@ function ExperienceRow({
             </div>
 
             {/* expand indicator */}
-            <div className="mt-1 flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-metal-dim transition-colors group-hover:text-crimson">
+            <div className="mt-1 flex items-center gap-1.5 text-[10px] tracking-wide text-metal-dim transition-colors group-hover:text-crimson">
               <ChevronDown
                 className={cn(
                   "h-3.5 w-3.5 transition-transform duration-300",
                   expanded && "rotate-180",
                 )}
               />
-              {expanded ? "[CLICK_TO_COLLAPSE]" : "[CLICK_TO_EXPAND]"}
+              {expanded ? "Hide details" : "View details"}
             </div>
           </button>
 
@@ -332,16 +329,16 @@ function ExperienceRow({
               >
                 <div className="border-t border-crimson/15 px-5 pb-6 pt-4 sm:px-6">
                   {/* responsibilities */}
-                  <h4 className="font-mono text-[10px] tracking-widest text-metal-dim">
-                    {"// RESPONSIBILITIES"}
+                  <h4 className="text-[10px] tracking-widest text-metal-dim uppercase">
+                    Responsibilities
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-metal-grey">
                     {exp.desc}
                   </p>
 
                   {/* achievements */}
-                  <h4 className="mt-5 font-mono text-[10px] tracking-widest text-metal-dim">
-                    {"// KEY_ACHIEVEMENTS"}
+                  <h4 className="mt-5 text-[10px] tracking-widest text-metal-dim uppercase">
+                    Key achievements
                   </h4>
                   <ul className="mt-2 space-y-2">
                     {exp.highlights.map((h, i) => (
@@ -358,8 +355,8 @@ function ExperienceRow({
                   {/* technical impact */}
                   {exp.impact && (
                     <div className="mt-5 rounded-md border border-crimson/20 bg-crimson/5 p-3">
-                      <p className="font-mono text-[10px] tracking-widest text-crimson">
-                        {"// TECHNICAL_IMPACT"}
+                      <p className="text-[10px] tracking-widest text-crimson uppercase">
+                        Technical impact
                       </p>
                       <p className="mt-1.5 text-sm leading-relaxed text-bright/90">
                         {exp.impact}
@@ -382,10 +379,10 @@ function ExperienceRow({
                       href={exp.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/btn mt-5 inline-flex items-center gap-2 rounded-md border border-crimson/40 bg-crimson/10 px-4 py-2.5 font-mono text-xs text-crimson transition-all hover:bg-crimson hover:text-white"
+                      className="group/btn mt-5 inline-flex items-center gap-2 rounded-md border border-crimson/40 bg-crimson/10 px-4 py-2.5 text-xs text-crimson transition-all hover:bg-crimson hover:text-white"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
-                      [GO_TO_PROJECT_SITE]
+                      Visit project
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                     </a>
                   )}

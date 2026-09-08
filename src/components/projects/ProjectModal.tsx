@@ -84,7 +84,7 @@ export function ProjectModal({
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-7">
           {/* screenshot / preview area */}
-          <ProjectShowcase project={project} order={order} />
+          <ProjectShowcase key={project.id} project={project} order={order} />
 
           {/* title + metadata */}
           <h3 className="mt-6 font-display text-2xl font-bold leading-tight text-bright sm:text-3xl">
@@ -135,10 +135,10 @@ export function ProjectModal({
             </a>
           )}
           {!hasLinks && (
-            <p className="flex-1 py-2.5 text-center font-mono text-xs text-metal-dim">
-              {"// no public link — internal / coursework build"}
-            </p>
-          )}
+                      <p className="flex-1 py-2.5 text-center text-xs text-metal-dim">
+                        Internal or coursework build — no public link.
+                      </p>
+                    )}
         </div>
       </motion.div>
     </motion.div>
