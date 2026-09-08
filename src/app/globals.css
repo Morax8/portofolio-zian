@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SWISS TECH EDITORIAL — DESIGN TOKENS (Tailwind v4 @theme)
+
+   Rules this system follows:
+   1. Structure comes from rules and alignment, never from glow.
+   2. The accent is punctuation. If it appears more than a few
+      times per screen it has stopped meaning anything.
+   3. Monospace marks data — dates, counts, labels. Never mood.
+   4. Motion states an entrance once, then gets out of the way.
+   ============================================================ */
+@theme {
+  /* Surfaces — neutral greys, no blue cast to fight the accent */
+  --color-void: #0a0a0b;
+  --color-carbon: #111113;
+  --color-carbon-2: #161619;
+  --color-carbon-3: #1c1c20;
+
+  /* Accent */
+  --color-crimson: #f43f5e;
+  --color-crimson-red: #e11d48;
+  --color-crimson-deep: #9f1239;
+
+  /* Text hierarchy — three steps, clearly separated */
+  --color-bright: #fafafa;
+  --color-metal-grey: #a1a1aa;
+  --color-metal-dim: #71717a;
+
+  /* Rules — the load-bearing element of the whole layout */
+  --color-rule: rgba(255, 255, 255, 0.11);
+  --color-rule-strong: rgba(255, 255, 255, 0.22);
+
+  /* Swiss geometry. Overriding Tailwind's radius scale here flattens
+     every existing rounded-* in the codebase from one place. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 3px;
+  --radius-3xl: 3px;
+
+  /* Fonts */
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Motion */
+  --animate-status-pulse: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-caret: caret 1.1s step-end infinite;
+  --animate-spine: spine 3.5s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes spine {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-gutter: stable;
+  }
+
+  /* Flat ground. No vignette, no decorative grid — the layout's own
+     rules carry the structure. */
+  body {
+    background-color: var(--color-void);
+  }
+
+  ::selection {
+    background: var(--color-crimson);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #26262b;
+    border: 3px solid var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a42;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-crimson);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+/* Faint dotted ground used inside code panels */
+@utility grid-dots {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+}
+
+/* Editorial eyebrow tracking — wide enough to read as a label,
+   narrow enough not to read as a HUD. */
+@utility tracking-tactical {
+  letter-spacing: 0.16em;
+}
+
+/* Display type wants negative tracking as it scales up */
+@utility tracking-display {
+  letter-spacing: -0.035em;
+}
