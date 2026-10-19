@@ -117,7 +117,7 @@ export const NAV_LINKS: NavLink[] = [
 
 export const STATS: Stat[] = [
   { label: "Roles held", value: "9" },
-  { label: "Projects shipped", value: "10" },
+  { label: "Projects shipped", value: "9" },
   { label: "Organizations", value: "6" },
   { label: "Building since", value: "2023" },
 ];
@@ -409,12 +409,7 @@ export const PROJECTS: Project[] = [
     desc: "ML classifier leveraging URL lexical features to detect phishing sites, using an ensemble-based approach.",
     repoUrl: "https://github.com/Morax8/FinalProjectML",
   },
-  {
-    id: "loan",
-    title: "Loan Approval Prediction",
-    tags: ["Python", "Scikit-Learn", "Flask"],
-    desc: "Predictive model comparing Decision Tree and Gradient Boosting for loan eligibility, with a Flask UI.",
-  },
+
   {
     id: "pentest",
     title: "HMIF Penetration Testing",
