@@ -116,8 +116,8 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const STATS: Stat[] = [
-  { label: "Roles held", value: "8" },
-  { label: "Projects shipped", value: "9" },
+  { label: "Roles held", value: "9" },
+  { label: "Projects shipped", value: "10" },
   { label: "Organizations", value: "6" },
   { label: "Building since", value: "2023" },
 ];
@@ -234,8 +234,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: "ppif-coord",
     role: "Website Division Coordinator",
     org: "PPIF UMN",
-    period: "Jan 2026 – Present",
-    current: true,
+    period: "Jan 2026 – Okt 2026",
+    current: false,
     categories: ["LEADERSHIP"],
     tags: ["Next.js", "React", "Socket.io"],
     summary: "Directing PPIF's website and Kahoot-style quiz platform.",
@@ -246,7 +246,27 @@ export const EXPERIENCES: ExperienceItem[] = [
     ],
     impact:
       "Directs the web division's delivery for incoming-student onboarding.",
-    liveUrl: "https://ppif-2025.vercel.app",
+    liveUrl: "https://ppif.umn.ac.id",
+  },
+  {
+    id: "fuse-coord",
+    role: "Website Division Coordinator",
+    org: "FUSE IGNITE 2026",
+    period: "Jun 2026 – Sep 2026",
+    categories: ["LEADERSHIP"],
+    tags: ["Laravel", "Inertia.js", "Backend Architecture", "MySQL"],
+    summary:
+      "Led backend architecture for HMIF's annual sports and esports competition platform.",
+    desc: "Architected and built the backend of a full-featured competition platform using Laravel 13, Inertia.js, and MySQL. Delivered a 5-step registration wizard with tiered payment verification, CAS SSO campus authentication, live single-elimination bracket with Challonge import, participant attendance tracking, and an admin CMS with audit logging. Codebase maintained at 215 tests and 908 assertions with PHPStan at maximum strictness.",
+    highlights: [
+      "Architected the backend with Laravel 13, MySQL 8.4, and CAS SSO integration.",
+      "Built a 5-step registration wizard with tiered payment verification.",
+      "Delivered live bracket system with Challonge import and attendance tracking.",
+      "Maintained 215 tests / 908 assertions with PHPStan at maximum strictness.",
+    ],
+    impact:
+      "Delivered a production-grade competition platform serving HMIF's largest annual event.",
+    liveUrl: "https://fuse.umn.ac.id",
   },
   {
     id: "ppif-member",
@@ -400,6 +420,23 @@ export const PROJECTS: Project[] = [
     title: "HMIF Penetration Testing",
     tags: ["Kali Linux", "dirb", "whatweb"],
     desc: "Security assessment of the HMIF website using web enumeration and reconnaissance tools.",
+  },
+  {
+    id: "fuse",
+    title: "FUSE IGNITE 2026",
+    tags: ["Laravel", "Inertia.js", "MySQL", "CAS SSO"],
+    desc: "Full-featured competition platform with 5-step registration, tiered payment verification, live bracket with Challonge import, and admin CMS. 215 tests at PHPStan max strictness.",
+    liveUrl: "https://fuse.umn.ac.id",
+    screenshots: [
+      { src: "/projects/fuse/01.webp", width: 1906, height: 916 },
+      { src: "/projects/fuse/02.webp", width: 1908, height: 920 },
+      { src: "/projects/fuse/03.webp", width: 1905, height: 923 },
+      { src: "/projects/fuse/04.webp", width: 1907, height: 920 },
+      { src: "/projects/fuse/05.webp", width: 1901, height: 910 },
+      { src: "/projects/fuse/06.webp", width: 1911, height: 931 },
+      { src: "/projects/fuse/07.webp", width: 1908, height: 914 },
+      { src: "/projects/fuse/08.webp", width: 1907, height: 907 },
+    ],
   },
 ];
 
