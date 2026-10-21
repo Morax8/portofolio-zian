@@ -197,7 +197,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: "lab-supervisor",
-    role: "Former Lab Supervisor",
+    role: "Lab Supervisor",
     org: "Informatics Laboratory UMN",
     period: "Apr 2025 – Apr 2026",
     current: false,
@@ -234,7 +234,7 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: "ppif-coord",
     role: "Website Division Coordinator",
     org: "PPIF UMN",
-    period: "Jan 2026 – Okt 2026",
+    period: "Jan 2026 – Oct 2026",
     current: false,
     categories: ["LEADERSHIP"],
     tags: ["Next.js", "React", "Socket.io"],
